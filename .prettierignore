@@ -2,5 +2,8 @@
 
 .gitignore
 .prettierignore
+.env
 
 src/generated/**
+prisma/schema.prisma
+prisma/migrations/**
