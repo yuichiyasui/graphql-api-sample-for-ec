@@ -1,4 +1,4 @@
-import { Item, Resolvers } from '../generated/graphql';
+import type { Item, Resolvers } from '../generated/graphql';
 
 const items: Item[] = [
   {
