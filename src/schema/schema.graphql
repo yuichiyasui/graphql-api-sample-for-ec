@@ -1,0 +1,10 @@
+"商品"
+type Item {
+  id: ID!
+  name: String!
+}
+
+type Query {
+  "商品一覧"
+  items: [Item!]!
+}
