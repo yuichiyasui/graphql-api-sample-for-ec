@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "lib": ["esnext"],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
