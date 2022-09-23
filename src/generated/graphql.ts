@@ -13,6 +13,7 @@ export type Scalars = {
   Float: number;
 };
 
+/** 商品 */
 export type Item = {
   __typename?: 'Item';
   id: Scalars['ID'];
@@ -21,6 +22,7 @@ export type Item = {
 
 export type Query = {
   __typename?: 'Query';
+  /** 商品一覧 */
   items: Array<Item>;
 };
 
