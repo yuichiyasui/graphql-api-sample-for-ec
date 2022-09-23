@@ -16,6 +16,7 @@
     "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint"],
+  "ignorePatterns": ["src/generated/graphql.ts"],
   "rules": {
     "no-console": "error"
   }

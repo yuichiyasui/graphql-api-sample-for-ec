@@ -1,5 +1,6 @@
 import { ApolloServer, gql } from 'apollo-server';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import { Item, Resolvers } from './generated/graphql';
 
 const typeDefs = gql`
   type Item {
@@ -12,7 +13,7 @@ const typeDefs = gql`
   }
 `;
 
-const items = [
+const items: Item[] = [
   {
     id: '1',
     name: '商品1',
@@ -23,7 +24,7 @@ const items = [
   },
 ];
 
-const resolvers = {
+const resolvers: Resolvers = {
   Query: {
     items: () => items,
   },
