@@ -1,10 +1,21 @@
 "商品"
 type Item {
   id: Int!
+  "商品名"
+  name: String!
+}
+
+input CreateItemInput {
+  "商品名"
   name: String!
 }
 
 type Query {
   "商品一覧"
   items: [Item!]!
+}
+
+type Mutation {
+  "商品を作成する"
+  createItem(input: CreateItemInput!): Item!
 }

@@ -10,4 +10,9 @@ export const resolvers: Resolvers = {
       return await prisma.item.findMany();
     },
   },
+  Mutation: {
+    createItem: async (_parent, args) => {
+      return await prisma.item.create({ data: args.input });
+    },
+  },
 };
