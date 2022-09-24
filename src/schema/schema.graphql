@@ -1,6 +1,6 @@
 "商品"
 type Item {
-  id: ID!
+  id: Int!
   name: String!
 }
 

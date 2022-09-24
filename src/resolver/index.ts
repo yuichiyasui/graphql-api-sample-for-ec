@@ -1,18 +1,13 @@
-import type { Item, Resolvers } from '~/generated/graphql';
+import { PrismaClient } from '@prisma/client';
 
-const items: Item[] = [
-  {
-    id: '1',
-    name: '商品1',
-  },
-  {
-    id: '2',
-    name: '商品2',
-  },
-];
+import type { Resolvers } from '~/generated/graphql';
+
+const prisma = new PrismaClient();
 
 export const resolvers: Resolvers = {
   Query: {
-    items: () => items,
+    items: async () => {
+      return await prisma.item.findMany();
+    },
   },
 };
