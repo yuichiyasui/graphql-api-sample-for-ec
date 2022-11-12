@@ -16,7 +16,8 @@
     "codegen": "graphql-codegen --config codegen.yml",
     "db:migrate": "prisma migrate dev",
     "db:seed": "ts-node prisma/seed.ts",
-    "db:browse": "prisma studio"
+    "db:browse": "prisma studio",
+    "db:format-schema": "prisma format"
   },
   "dependencies": {
     "@prisma/client": "^4.3.1",
