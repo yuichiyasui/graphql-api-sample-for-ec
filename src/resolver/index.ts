@@ -5,6 +5,7 @@ import { UserInputError } from 'apollo-server-errors';
 import { GraphQLError } from 'graphql';
 import Validator from 'validatorjs';
 
+import { sendMail } from '../libs/nodemailer';
 import { customScalars } from './custom-scalars';
 import type { Resolvers } from '~/generated/graphql';
 
@@ -46,17 +47,27 @@ export const resolvers: Resolvers = {
         .update(input.email)
         .digest('hex');
 
-      try {
-        const temporaryUser = await prisma.temporaryUser.create({
+      const temporaryUser = await prisma.temporaryUser
+        .create({
           data: { email: input.email, verificationToken },
+        })
+        .catch(() => {
+          throw new GraphQLError(
+            'This email address may already be registered as temporary user.',
+          );
         });
-        // TODO: 検証トークン付きの本登録用のURLをメールアドレスに送信する
-        // eslint-disable-next-line no-console
-        console.log(`Sent email to '${temporaryUser.email}'`);
+
+      try {
+        await sendMail({
+          to: temporaryUser.email,
+          subject: '本会員登録のお手続きについて',
+          text: `
+            次のURLにアクセスして会員登録を完了してください。
+            ${process.env.CLIENT_ORIGIN_URL}/sign-up?token=${temporaryUser.verificationToken}
+          `,
+        });
       } catch (error) {
-        throw new GraphQLError(
-          'This email address may already be registered as temporary user.',
-        );
+        throw new GraphQLError('Mail Send Error');
       }
     },
   },
