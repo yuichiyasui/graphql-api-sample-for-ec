@@ -1,3 +1,5 @@
+scalar Void
+
 "商品"
 type Item {
   id: Int!
@@ -10,6 +12,11 @@ input CreateItemInput {
   name: String!
 }
 
+input RegisterTemporaryUserInput {
+  "メールアドレス"
+  email: String!
+}
+
 type Query {
   "商品一覧"
   items: [Item!]!
@@ -18,4 +25,6 @@ type Query {
 type Mutation {
   "商品を作成する"
   createItem(input: CreateItemInput!): Item!
+  "仮ユーザー登録"
+  registerTemporaryUser(input: RegisterTemporaryUserInput!): Void
 }
