@@ -20,6 +20,8 @@ input RegisterTemporaryUserInput {
 type Query {
   "商品一覧"
   items: [Item!]!
+  "仮ユーザートークンが有効かどうか"
+  isValidTemporaryUserToken(token: String!): Boolean!
 }
 
 type Mutation {

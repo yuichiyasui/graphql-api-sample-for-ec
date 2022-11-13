@@ -48,8 +48,15 @@ export type MutationRegisterTemporaryUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  /** 仮ユーザートークンが有効かどうか */
+  isValidTemporaryUserToken: Scalars['Boolean'];
   /** 商品一覧 */
   items: Array<Item>;
+};
+
+
+export type QueryIsValidTemporaryUserTokenArgs = {
+  token: Scalars['String'];
 };
 
 export type RegisterTemporaryUserInput = {
@@ -162,6 +169,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  isValidTemporaryUserToken?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<QueryIsValidTemporaryUserTokenArgs, 'token'>>;
   items?: Resolver<Array<ResolversTypes['Item']>, ParentType, ContextType>;
 };
 

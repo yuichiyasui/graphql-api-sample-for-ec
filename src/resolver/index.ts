@@ -1,5 +1,3 @@
-import crypto from 'crypto';
-
 import { PrismaClient } from '@prisma/client';
 import { UserInputError } from 'apollo-server-errors';
 import { GraphQLError } from 'graphql';
@@ -15,6 +13,13 @@ export const resolvers: Resolvers = {
   Query: {
     items: async () => {
       return await prisma.item.findMany();
+    },
+    isValidTemporaryUserToken: async (_parent, { token }) => {
+      const temporaryUser = await prisma.temporaryUser.findFirst({
+        where: { id: token },
+      });
+
+      return !!temporaryUser;
     },
   },
   Mutation: {
@@ -42,14 +47,9 @@ export const resolvers: Resolvers = {
         throw new GraphQLError('Database Connection Error');
       }
 
-      const verificationToken = crypto
-        .createHash('sha256')
-        .update(input.email)
-        .digest('hex');
-
       const temporaryUser = await prisma.temporaryUser
         .create({
-          data: { email: input.email, verificationToken },
+          data: { email: input.email },
         })
         .catch(() => {
           throw new GraphQLError(
@@ -63,7 +63,7 @@ export const resolvers: Resolvers = {
           subject: '本会員登録のお手続きについて',
           text: `
             次のURLにアクセスして会員登録を完了してください。
-            ${process.env.CLIENT_ORIGIN_URL}/sign-up?token=${temporaryUser.verificationToken}
+            ${process.env.CLIENT_ORIGIN_URL}/sign-up?token=${temporaryUser.id}
           `,
         });
       } catch (error) {

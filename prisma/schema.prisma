@@ -26,9 +26,8 @@ model User {
 }
 
 model TemporaryUser {
-  id                Int       @id @default(autoincrement())
-  email             String    @unique @db.VarChar(254)
-  verificationToken String    @unique @db.VarChar(255)
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime? @updatedAt
+  id        String    @id @default(uuid())
+  email     String    @unique @db.VarChar(255)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 }
