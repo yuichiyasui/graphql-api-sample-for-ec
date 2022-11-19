@@ -2,7 +2,8 @@
 
 .gitignore
 .prettierignore
-.env
+.env*
+.tool-versions
 
 src/generated/**
 prisma/schema.prisma

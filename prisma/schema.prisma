@@ -11,8 +11,33 @@ datasource db {
 }
 
 model Item {
-  id Int @id @default(autoincrement())
-  name String @db.VarChar(255)
-  createdAt DateTime @default(now())
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(255)
+  createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique @db.VarChar(254)
+  name      String    @db.VarChar(30)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
+  Authorization Authorization[]
+}
+
+model TemporaryUser {
+  id        String    @id @default(uuid())
+  email     String    @unique @db.VarChar(255)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
+model Authorization {
+  id       String @id @default(uuid())
+  userId   String @unique
+  password String @db.Text
+
+  user User @relation(fields: [userId], references: [id])
 }

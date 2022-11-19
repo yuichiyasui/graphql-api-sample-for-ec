@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -12,6 +12,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Void: any;
 };
 
 export type CreateItemInput = {
@@ -31,6 +32,10 @@ export type Mutation = {
   __typename?: 'Mutation';
   /** 商品を作成する */
   createItem: Item;
+  /** 仮ユーザー登録 */
+  registerTemporaryUser?: Maybe<Scalars['Void']>;
+  /** 本ユーザー登録 */
+  registerUser?: Maybe<Scalars['Void']>;
 };
 
 
@@ -38,10 +43,48 @@ export type MutationCreateItemArgs = {
   input: CreateItemInput;
 };
 
+
+export type MutationRegisterTemporaryUserArgs = {
+  input: RegisterTemporaryUserInput;
+};
+
+
+export type MutationRegisterUserArgs = {
+  input: RegisterUserInput;
+};
+
 export type Query = {
   __typename?: 'Query';
+  /** 仮ユーザートークンが有効かどうか */
+  isValidTemporaryUserToken: Scalars['Boolean'];
   /** 商品一覧 */
   items: Array<Item>;
+};
+
+
+export type QueryIsValidTemporaryUserTokenArgs = {
+  token: Scalars['String'];
+};
+
+export type RegisterTemporaryUserInput = {
+  /** メールアドレス */
+  email: Scalars['String'];
+};
+
+export type RegisterUserInput = {
+  /** 確認用パスワード */
+  confirmationPassword: Scalars['String'];
+  /**
+   * パスワード
+   * - 8桁以上100桁以下
+   * - 英大文字, 小文字, 数字, 記号のうちいずれか3種類を含む
+   * - 使用可能な記号 -> !@;:+_%&$#<>-
+   */
+  password: Scalars['String'];
+  /** 仮ユーザートークン */
+  temporaryUserToken: Scalars['String'];
+  /** ユーザー名 */
+  userName: Scalars['String'];
 };
 
 
@@ -119,7 +162,10 @@ export type ResolversTypes = {
   Item: ResolverTypeWrapper<Item>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
+  RegisterTemporaryUserInput: RegisterTemporaryUserInput;
+  RegisterUserInput: RegisterUserInput;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Void: ResolverTypeWrapper<Scalars['Void']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -130,7 +176,10 @@ export type ResolversParentTypes = {
   Item: Item;
   Mutation: {};
   Query: {};
+  RegisterTemporaryUserInput: RegisterTemporaryUserInput;
+  RegisterUserInput: RegisterUserInput;
   String: Scalars['String'];
+  Void: Scalars['Void'];
 };
 
 export type ItemResolvers<ContextType = any, ParentType extends ResolversParentTypes['Item'] = ResolversParentTypes['Item']> = {
@@ -141,15 +190,23 @@ export type ItemResolvers<ContextType = any, ParentType extends ResolversParentT
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   createItem?: Resolver<ResolversTypes['Item'], ParentType, ContextType, RequireFields<MutationCreateItemArgs, 'input'>>;
+  registerTemporaryUser?: Resolver<Maybe<ResolversTypes['Void']>, ParentType, ContextType, RequireFields<MutationRegisterTemporaryUserArgs, 'input'>>;
+  registerUser?: Resolver<Maybe<ResolversTypes['Void']>, ParentType, ContextType, RequireFields<MutationRegisterUserArgs, 'input'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  isValidTemporaryUserToken?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<QueryIsValidTemporaryUserTokenArgs, 'token'>>;
   items?: Resolver<Array<ResolversTypes['Item']>, ParentType, ContextType>;
 };
+
+export interface VoidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Void'], any> {
+  name: 'Void';
+}
 
 export type Resolvers<ContextType = any> = {
   Item?: ItemResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Void?: GraphQLScalarType;
 };
 
