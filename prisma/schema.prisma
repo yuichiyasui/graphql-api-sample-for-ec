@@ -23,6 +23,8 @@ model User {
   name      String    @db.VarChar(30)
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+
+  Authorization Authorization[]
 }
 
 model TemporaryUser {
@@ -30,4 +32,12 @@ model TemporaryUser {
   email     String    @unique @db.VarChar(255)
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+}
+
+model Authorization {
+  id       String @id @default(uuid())
+  userId   String @unique
+  password String @db.Text
+
+  user User @relation(fields: [userId], references: [id])
 }
