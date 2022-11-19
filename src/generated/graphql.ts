@@ -34,6 +34,8 @@ export type Mutation = {
   createItem: Item;
   /** 仮ユーザー登録 */
   registerTemporaryUser?: Maybe<Scalars['Void']>;
+  /** 本ユーザー登録 */
+  registerUser?: Maybe<Scalars['Void']>;
 };
 
 
@@ -44,6 +46,11 @@ export type MutationCreateItemArgs = {
 
 export type MutationRegisterTemporaryUserArgs = {
   input: RegisterTemporaryUserInput;
+};
+
+
+export type MutationRegisterUserArgs = {
+  input: RegisterUserInput;
 };
 
 export type Query = {
@@ -62,6 +69,22 @@ export type QueryIsValidTemporaryUserTokenArgs = {
 export type RegisterTemporaryUserInput = {
   /** メールアドレス */
   email: Scalars['String'];
+};
+
+export type RegisterUserInput = {
+  /** 確認用パスワード */
+  confirmationPassword: Scalars['String'];
+  /**
+   * パスワード
+   * - 8桁以上100桁以下
+   * - 英大文字, 小文字, 数字, 記号のうちいずれか3種類を含む
+   * - 使用可能な記号 -> !@;:+_%&$#<>-
+   */
+  password: Scalars['String'];
+  /** 仮ユーザートークン */
+  temporaryUserToken: Scalars['String'];
+  /** ユーザー名 */
+  userName: Scalars['String'];
 };
 
 
@@ -140,6 +163,7 @@ export type ResolversTypes = {
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   RegisterTemporaryUserInput: RegisterTemporaryUserInput;
+  RegisterUserInput: RegisterUserInput;
   String: ResolverTypeWrapper<Scalars['String']>;
   Void: ResolverTypeWrapper<Scalars['Void']>;
 };
@@ -153,6 +177,7 @@ export type ResolversParentTypes = {
   Mutation: {};
   Query: {};
   RegisterTemporaryUserInput: RegisterTemporaryUserInput;
+  RegisterUserInput: RegisterUserInput;
   String: Scalars['String'];
   Void: Scalars['Void'];
 };
@@ -166,6 +191,7 @@ export type ItemResolvers<ContextType = any, ParentType extends ResolversParentT
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   createItem?: Resolver<ResolversTypes['Item'], ParentType, ContextType, RequireFields<MutationCreateItemArgs, 'input'>>;
   registerTemporaryUser?: Resolver<Maybe<ResolversTypes['Void']>, ParentType, ContextType, RequireFields<MutationRegisterTemporaryUserArgs, 'input'>>;
+  registerUser?: Resolver<Maybe<ResolversTypes['Void']>, ParentType, ContextType, RequireFields<MutationRegisterUserArgs, 'input'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {

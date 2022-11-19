@@ -17,6 +17,22 @@ input RegisterTemporaryUserInput {
   email: String!
 }
 
+input RegisterUserInput {
+  "仮ユーザートークン"
+  temporaryUserToken: String!
+  "ユーザー名"
+  userName: String!
+  """
+  パスワード
+  - 8桁以上100桁以下
+  - 英大文字, 小文字, 数字, 記号のうちいずれか3種類を含む
+  - 使用可能な記号 -> !@;:+_%&$#<>-
+  """
+  password: String!
+  "確認用パスワード"
+  confirmationPassword: String!
+}
+
 type Query {
   "商品一覧"
   items: [Item!]!
@@ -29,4 +45,6 @@ type Mutation {
   createItem(input: CreateItemInput!): Item!
   "仮ユーザー登録"
   registerTemporaryUser(input: RegisterTemporaryUserInput!): Void
+  "本ユーザー登録"
+  registerUser(input: RegisterUserInput!): Void
 }
