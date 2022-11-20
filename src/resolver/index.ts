@@ -1,15 +1,15 @@
-import { PrismaClient } from '@prisma/client';
 import { UserInputError } from 'apollo-server-errors';
 import bcrypt from 'bcrypt';
 import { GraphQLError } from 'graphql';
 import Validator from 'validatorjs';
 
-import { sendMail } from '../libs/nodemailer';
-import { isPasswordValidFormat } from '../utils/validation';
 import { customScalars } from './custom-scalars';
 import type { Resolvers } from '~/generated/graphql';
+import { sendMail } from '~/libs/nodemailer';
+import { initializePrisma } from '~/libs/prisma';
+import { isPasswordValidFormat } from '~/utils/validation';
 
-const prisma = new PrismaClient();
+const prisma = initializePrisma();
 
 export const resolvers: Resolvers = {
   Query: {
