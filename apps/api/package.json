@@ -30,6 +30,8 @@
     "@graphql-codegen/introspection": "2.2.1",
     "@graphql-codegen/typescript": "2.7.3",
     "@graphql-codegen/typescript-resolvers": "2.7.3",
+    "@monorepo/eslint-config": "^0.0.0",
+    "@monorepo/tsconfig": "^0.0.0",
     "@types/bcrypt": "^5.0.0",
     "@types/nodemailer": "^6.4.6",
     "@types/validatorjs": "^3.15.0",

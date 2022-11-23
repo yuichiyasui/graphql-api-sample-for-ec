@@ -6,27 +6,21 @@
   "license": "ISC",
   "private": true,
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
     "dev": "npm run dev -w apps/api",
     "test": "npm run test --workspaces --if-present",
-    "lint": "eslint src/**/*.ts",
-    "lint-fix": "eslint --fix apps/**/*.ts",
+    "lint": "eslint apps/**/*.ts",
+    "lint-fix": "npm run eslint --fix apps/**/*.ts",
     "format": "prettier --write 'apps/**/*.ts'",
     "prepare": "husky install"
   },
   "devDependencies": {
     "@types/jest": "^29.2.3",
     "@types/node": "^18.7.18",
-    "@typescript-eslint/eslint-plugin": "^5.38.0",
-    "@typescript-eslint/parser": "^5.38.0",
     "eslint": "^8.23.1",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.3.0",
-    "eslint-plugin-promise": "^6.0.1",
     "husky": "^8.0.1",
     "jest": "^29.3.1",
     "lint-staged": "^13.0.3",

@@ -4,7 +4,4 @@
 .prettierignore
 .env*
 .tool-versions
-
-apps/api/generated/**
-apps/api/prisma/schema.prisma
-apps/api/prisma/migrations/**
+.npmrc
