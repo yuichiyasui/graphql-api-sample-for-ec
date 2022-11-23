@@ -1,8 +1,10 @@
-# graphql-api-sample-for-ec
+# shopping-app-sample
 
-This project is GraphQL API sample assuming e-commerse business.
+This project is sample app assuming e-commerse business.
 
 ## Stack
+
+API
 
 - TypeScript
 - GraphQL

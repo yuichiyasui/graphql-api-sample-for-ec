@@ -5,6 +5,6 @@
 .env*
 .tool-versions
 
-src/generated/**
-prisma/schema.prisma
-prisma/migrations/**
+apps/api/generated/**
+apps/api/prisma/schema.prisma
+apps/api/prisma/migrations/**

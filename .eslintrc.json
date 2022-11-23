@@ -16,7 +16,7 @@
     "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint", "eslint-plugin-import"],
-  "ignorePatterns": ["src/generated/graphql.ts"],
+  "ignorePatterns": ["apps/api/src/generated/graphql.ts"],
   "rules": {
     "no-console": "error",
     "import/order": [
