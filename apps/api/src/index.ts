@@ -13,7 +13,7 @@ const server = new ApolloServer({
   plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
 });
 
-server.listen().then(({ url }) => {
+server.listen({ port: 4000 }).then(({ url }) => {
   // eslint-disable-next-line no-console
   console.log(`🚀  Server ready at ${url}`);
 });

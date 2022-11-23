@@ -12,9 +12,9 @@
   "scripts": {
     "dev": "npm run dev -w apps/api",
     "test": "npm run test --workspaces --if-present",
-    "lint": "eslint apps/**/*.ts",
-    "lint-fix": "npm run eslint --fix apps/**/*.ts",
-    "format": "prettier --write 'apps/**/*.ts'",
+    "lint": "npm run lint --workspaces --if-present",
+    "lint-fix": "npm run lint-fix --workspaces --if-present",
+    "format": "prettier --write './**/*.{ts,js,tsx.json}'",
     "prepare": "husky install"
   },
   "devDependencies": {
@@ -28,6 +28,6 @@
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.0",
-    "typescript": "^4.8.3"
+    "typescript": "4.9.3"
   }
 }
