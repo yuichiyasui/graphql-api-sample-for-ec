@@ -5,3 +5,16 @@
 .env*
 .tool-versions
 .npmrc
+
+# static
+*.ico
+*.svg
+
+# api
+apps/api/prisma/schema.prisma
+apps/api/prisma/migrations/**
+
+# front
+**/.next/**
+**/dist/**
+**/build/**
