@@ -4,7 +4,4 @@
 .prettierignore
 .env*
 .tool-versions
-
-src/generated/**
-prisma/schema.prisma
-prisma/migrations/**
+.npmrc

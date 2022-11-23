@@ -1,0 +1,10 @@
+{
+  "extends": "@monorepo/tsconfig",
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@monorepo/eslint-config",
+  "version": "0.0.0",
+  "description": "",
+  "author": "yuichiyasui",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-promise": "^6.1.1"
+  }
+}
