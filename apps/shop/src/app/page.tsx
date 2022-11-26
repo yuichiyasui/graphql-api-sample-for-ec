@@ -1,7 +1,12 @@
 export default function Page() {
   return (
-    <div>
-      <h1 className="text-red-800">トップページ</h1>
-    </div>
+    <>
+      <h2 className="font-bold text-lg mb-4">商品一覧</h2>
+      <ul>
+        <li>商品A</li>
+        <li>商品B</li>
+        <li>商品C</li>
+      </ul>
+    </>
   );
 }
