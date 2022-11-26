@@ -1,7 +1,7 @@
 export default function Page() {
   return (
     <div>
-      <h1>トップページ</h1>
+      <h1 className="text-red-800">トップページ</h1>
     </div>
   );
 }
