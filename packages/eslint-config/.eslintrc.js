@@ -32,5 +32,26 @@ module.exports = {
       'warn',
       { prefer: 'type-imports' },
     ],
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+        destructuredArrayIgnorePattern: '^_',
+      },
+    ],
   },
+  overrides: [
+    {
+      files: ['*.graphql'],
+      parser: '@graphql-eslint/eslint-plugin',
+      plugins: ['@graphql-eslint'],
+      rules: {
+        '@graphql-eslint/known-type-names': 'error',
+        '@graphql-eslint/no-duplicate-fields': 'error',
+        '@graphql-eslint/no-anonymous-operations': 'error',
+      },
+    },
+  ],
 };

@@ -10,6 +10,9 @@
 *.ico
 *.svg
 
+# common
+**/generated/**
+
 # api
 apps/api/prisma/schema.prisma
 apps/api/prisma/migrations/**
