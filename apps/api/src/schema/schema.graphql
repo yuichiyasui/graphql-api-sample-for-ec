@@ -2,9 +2,15 @@ scalar Void
 
 "商品"
 type Item {
-  id: Int!
+  id: ID!
   "商品名"
   name: String!
+  "価格"
+  price: Int!
+  "価格(表示用)"
+  displayPrice: String!
+  "メイン画像URL"
+  mainImageUrl: String!
 }
 
 input CreateItemInput {

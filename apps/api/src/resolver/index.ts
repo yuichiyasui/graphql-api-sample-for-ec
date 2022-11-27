@@ -6,17 +6,14 @@ import Validator from 'validatorjs';
 import { customScalars } from './custom-scalars';
 import type { Resolvers } from '~/generated/graphql';
 import { sendMail } from '~/libs/nodemailer';
-import { initializePrisma } from '~/libs/prisma';
 import { isPasswordValidFormat } from '~/utils/validation';
-
-const prisma = initializePrisma();
 
 export const resolvers: Resolvers = {
   Query: {
-    items: async () => {
+    items: async (_parent, _args, { prisma }) => {
       return await prisma.item.findMany();
     },
-    isValidTemporaryUserToken: async (_parent, { token }) => {
+    isValidTemporaryUserToken: async (_parent, { token }, { prisma }) => {
       const temporaryUser = await prisma.temporaryUser.findFirst({
         where: { id: token },
       });
@@ -25,10 +22,12 @@ export const resolvers: Resolvers = {
     },
   },
   Mutation: {
-    createItem: async (_parent, args) => {
-      return await prisma.item.create({ data: args.input });
+    createItem: async (_parent, args, { prisma }) => {
+      return await prisma.item.create({
+        data: args.input,
+      });
     },
-    registerTemporaryUser: async (_parent, { input }) => {
+    registerTemporaryUser: async (_parent, { input }, { prisma }) => {
       const validator = new Validator(input, {
         email: 'required|email',
       });
@@ -72,7 +71,7 @@ export const resolvers: Resolvers = {
         throw new GraphQLError('Mail Send Error');
       }
     },
-    registerUser: async (_parent, { input }) => {
+    registerUser: async (_parent, { input }, { prisma }) => {
       if (input.userName === '') {
         throw new UserInputError('User name is empty.');
       }
@@ -98,6 +97,12 @@ export const resolvers: Resolvers = {
         data: { userId: user.id, password: hashedPassword },
       });
       await prisma.temporaryUser.delete({ where: { id: temporaryUser.id } });
+    },
+  },
+  Item: {
+    id: ({ id }) => `${id}`,
+    displayPrice: ({ price }) => {
+      return `¥${price.toLocaleString()}`;
     },
   },
   ...customScalars,

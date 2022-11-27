@@ -1,4 +1,6 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
+import { ItemParent } from '~/types/parent';
+import { Context } from '~/types/context';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -23,9 +25,15 @@ export type CreateItemInput = {
 /** 商品 */
 export type Item = {
   __typename?: 'Item';
-  id: Scalars['Int'];
+  /** 価格(表示用) */
+  displayPrice: Scalars['String'];
+  id: Scalars['ID'];
+  /** メイン画像URL */
+  mainImageUrl: Scalars['String'];
   /** 商品名 */
   name: Scalars['String'];
+  /** 価格 */
+  price: Scalars['Int'];
 };
 
 export type Mutation = {
@@ -87,7 +95,8 @@ export type RegisterUserInput = {
   userName: Scalars['String'];
 };
 
-
+export type WithIndex<TObject> = TObject & Record<string, any>;
+export type ResolversObject<TObject> = WithIndex<TObject>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -155,58 +164,63 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 ) => TResult | Promise<TResult>;
 
 /** Mapping between all available schema types and the resolvers types */
-export type ResolversTypes = {
+export type ResolversTypes = ResolversObject<{
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   CreateItemInput: CreateItemInput;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
-  Item: ResolverTypeWrapper<Item>;
+  Item: ResolverTypeWrapper<ItemParent>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   RegisterTemporaryUserInput: RegisterTemporaryUserInput;
   RegisterUserInput: RegisterUserInput;
   String: ResolverTypeWrapper<Scalars['String']>;
   Void: ResolverTypeWrapper<Scalars['Void']>;
-};
+}>;
 
 /** Mapping between all available schema types and the resolvers parents */
-export type ResolversParentTypes = {
+export type ResolversParentTypes = ResolversObject<{
   Boolean: Scalars['Boolean'];
   CreateItemInput: CreateItemInput;
+  ID: Scalars['ID'];
   Int: Scalars['Int'];
-  Item: Item;
+  Item: ItemParent;
   Mutation: {};
   Query: {};
   RegisterTemporaryUserInput: RegisterTemporaryUserInput;
   RegisterUserInput: RegisterUserInput;
   String: Scalars['String'];
   Void: Scalars['Void'];
-};
+}>;
 
-export type ItemResolvers<ContextType = any, ParentType extends ResolversParentTypes['Item'] = ResolversParentTypes['Item']> = {
-  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type ItemResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Item'] = ResolversParentTypes['Item']> = ResolversObject<{
+  displayPrice?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  mainImageUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createItem?: Resolver<ResolversTypes['Item'], ParentType, ContextType, RequireFields<MutationCreateItemArgs, 'input'>>;
   registerTemporaryUser?: Resolver<Maybe<ResolversTypes['Void']>, ParentType, ContextType, RequireFields<MutationRegisterTemporaryUserArgs, 'input'>>;
   registerUser?: Resolver<Maybe<ResolversTypes['Void']>, ParentType, ContextType, RequireFields<MutationRegisterUserArgs, 'input'>>;
-};
+}>;
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   isValidTemporaryUserToken?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<QueryIsValidTemporaryUserTokenArgs, 'token'>>;
   items?: Resolver<Array<ResolversTypes['Item']>, ParentType, ContextType>;
-};
+}>;
 
 export interface VoidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Void'], any> {
   name: 'Void';
 }
 
-export type Resolvers<ContextType = any> = {
+export type Resolvers<ContextType = Context> = ResolversObject<{
   Item?: ItemResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Void?: GraphQLScalarType;
-};
+}>;
 

@@ -1,11 +1,16 @@
 overwrite: true
-schema: 'http://localhost:4000/graphql'
+schema: './src/schema/schema.graphql'
 documents: null
 generates:
   src/generated/graphql.ts:
     plugins:
       - 'typescript'
       - 'typescript-resolvers'
+    config:
+      useIndexSignature: true
+      contextType: ~/types/context#Context
+      mappers:
+        Item: ~/types/parent#ItemParent
   src/generated/graphql.schema.json:
     plugins:
       - 'introspection'
