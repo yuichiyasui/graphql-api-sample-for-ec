@@ -11,7 +11,7 @@ export default function RootLayout({
       <body>
         <div className="flex flex-col min-h-screen">
           <header className="border-b border-b-gray-100">
-            <div className="max-w-7xl mx-auto py-4">
+            <div className="max-w-7xl mx-auto py-4 px-4">
               <h1 className="font-bold text-xl">Shopping App Sample</h1>
             </div>
           </header>

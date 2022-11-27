@@ -6,14 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
+    "graphql-request": "^5.0.0",
     "next": "13.0.4",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@graphql-codegen/client-preset": "^1.1.5",
+    "@graphql-codegen/typescript-graphql-request": "^4.5.8",
     "@monorepo/eslint-config": "^0.0.0",
     "@monorepo/tsconfig": "^0.0.0",
     "@types/react": "18.0.25",

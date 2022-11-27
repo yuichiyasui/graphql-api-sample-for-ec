@@ -1,0 +1,9 @@
+query AllItems {
+  items {
+    id
+    name
+    price
+    displayPrice
+    mainImageUrl
+  }
+}
