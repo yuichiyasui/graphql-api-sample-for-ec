@@ -1,4 +1,4 @@
-import { UserInputError } from 'apollo-server-errors';
+import { ApolloServerErrorCode } from '@apollo/server/errors';
 import bcrypt from 'bcrypt';
 import { GraphQLError } from 'graphql';
 import Validator from 'validatorjs';
@@ -32,7 +32,9 @@ export const resolvers: Resolvers = {
         email: 'required|email',
       });
       if (validator.fails()) {
-        throw new UserInputError('Email is invalid.');
+        throw new GraphQLError('Email is invalid.', {
+          extensions: { code: ApolloServerErrorCode.BAD_USER_INPUT },
+        });
       }
 
       try {
@@ -73,10 +75,14 @@ export const resolvers: Resolvers = {
     },
     registerUser: async (_parent, { input }, { prisma }) => {
       if (input.userName === '') {
-        throw new UserInputError('User name is empty.');
+        throw new GraphQLError('User name is empty.', {
+          extensions: { code: ApolloServerErrorCode.BAD_USER_INPUT },
+        });
       }
       if (!isPasswordValidFormat(input)) {
-        throw new UserInputError('Passwords is invalid.');
+        throw new GraphQLError('Passwords is invalid.', {
+          extensions: { code: ApolloServerErrorCode.BAD_USER_INPUT },
+        });
       }
       const temporaryUser = await prisma.temporaryUser.findUnique({
         where: { id: input.temporaryUserToken },
