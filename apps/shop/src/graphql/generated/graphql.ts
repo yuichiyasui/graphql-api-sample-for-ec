@@ -99,5 +99,13 @@ export type AllItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type AllItemsQuery = { __typename?: 'Query', items: Array<{ __typename?: 'Item', id: string, name: string, price: number, displayPrice: string, mainImageUrl: string }> };
 
+export type RegisterTemporaryUserMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type RegisterTemporaryUserMutation = { __typename?: 'Mutation', registerTemporaryUser?: any | null };
+
 
 export const AllItemsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AllItems"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"displayPrice"}},{"kind":"Field","name":{"kind":"Name","value":"mainImageUrl"}}]}}]}}]} as unknown as DocumentNode<AllItemsQuery, AllItemsQueryVariables>;
+export const RegisterTemporaryUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"RegisterTemporaryUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"registerTemporaryUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}]}}]}]}}]} as unknown as DocumentNode<RegisterTemporaryUserMutation, RegisterTemporaryUserMutationVariables>;
