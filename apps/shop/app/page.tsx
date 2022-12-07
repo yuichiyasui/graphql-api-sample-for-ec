@@ -1,9 +1,7 @@
-import { AllItemsDocument } from 'graphql/generated/graphql';
 import Image from 'next/image';
 
+import { AllItemsDocument } from '~/graphql/generated/graphql';
 import { graphqlRequestClient } from '~/libs/graphql-request';
-
-export const dynamic = 'force-dynamic';
 
 const ItemList = async () => {
   const { items } = await graphqlRequestClient.request(AllItemsDocument);
@@ -32,7 +30,7 @@ const ItemList = async () => {
   );
 };
 
-export default async function Page() {
+export default function Page() {
   return (
     <div className="my-4">
       <section className="mx-4">

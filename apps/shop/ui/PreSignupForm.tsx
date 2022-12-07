@@ -7,7 +7,7 @@ import { useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as zod from 'zod';
 
-import { RegisterTemporaryUserDocument } from 'graphql/generated/graphql';
+import { RegisterTemporaryUserDocument } from '~/graphql/generated/graphql';
 import { graphqlRequestClient } from '~/libs/graphql-request';
 
 const schema = zod.object({
@@ -23,8 +23,8 @@ const Wrapper = ({
   children: ReactNode;
 }) => {
   return (
-    <section className="text-center border border-gray-100 max-w-xl mx-auto p-8 bg-white">
-      <h2 className="font-bold text-lg text-center mb-4">{title}</h2>
+    <section className="mx-auto max-w-xl border border-gray-100 bg-white p-8 text-center">
+      <h2 className="mb-4 text-center text-lg font-bold">{title}</h2>
       {children}
     </section>
   );
@@ -61,13 +61,13 @@ export const PreSignupForm = () => {
   if (hasError) {
     return (
       <Wrapper title="メールの送信に失敗しました">
-        <p className="text-sm mb-4">
+        <p className="mb-4 text-sm">
           既にメールアドレスが登録されている可能性があります。
           <br />
           パスワードが不明な場合はパスワードの再設定をお試しください。
         </p>
         {/* TODO: パスワード再設定ページ作成時にパスを変更する */}
-        <Link href="/" className="btn btn-primary text-white mb-2">
+        <Link href="/" className="btn btn-primary mb-2 text-white">
           パスワードを再設定する
         </Link>
         <p className="mb-2 text-sm">もしくは</p>
@@ -90,10 +90,10 @@ export const PreSignupForm = () => {
       <form
         onSubmit={handleSubmit((d) => sendEmail(d))}
         noValidate
-        className="text-center border border-gray-100 max-w-xl mx-auto p-8 bg-white"
+        className="mx-auto max-w-xl border border-gray-100 bg-white p-8 text-center"
       >
-        <h2 className="font-bold text-lg mb-4">メールアドレスによる本人確認</h2>
-        <p className="text-sm mb-4">
+        <h2 className="mb-4 text-lg font-bold">メールアドレスによる本人確認</h2>
+        <p className="mb-4 text-sm">
           本人確認を行うためメールアドレスのご登録をお願いいたします。
           <br />
           ご登録いただいたメールアドレスに本会員登録の
@@ -102,7 +102,7 @@ export const PreSignupForm = () => {
         </p>
         <div className="form-control mb-2">
           <label className="label flex-col">
-            <span className="label-text text-sm font-bold mb-2">
+            <span className="label-text mb-2 text-sm font-bold">
               メールアドレス
             </span>
             <input
@@ -112,7 +112,7 @@ export const PreSignupForm = () => {
               aria-describedby={inputEmailErrorMessageId}
               required
               aria-invalid={!!errors.email}
-              className={`input input-bordered text-center input-md w-full placeholder:text-center max-w-xs ${
+              className={`input input-bordered input-md w-full max-w-xs text-center placeholder:text-center ${
                 errors.email ? 'input-error' : ''
               }`}
               {...register('email', { required: true })}
@@ -123,7 +123,7 @@ export const PreSignupForm = () => {
           {!!errors.email?.message && (
             <p
               id={inputEmailErrorMessageId}
-              className="text-sm text-red-600 mb-4"
+              className="mb-4 text-sm text-red-600"
             >
               {errors.email.message}
             </p>
