@@ -7,7 +7,7 @@ import { useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as zod from 'zod';
 
-import { RegisterTemporaryUserDocument } from '~/graphql/generated/graphql';
+import { RegisterTemporaryUserDocument } from 'graphql/generated/graphql';
 import { graphqlRequestClient } from '~/libs/graphql-request';
 
 const schema = zod.object({
