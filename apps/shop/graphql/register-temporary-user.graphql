@@ -1,0 +1,3 @@
+mutation RegisterTemporaryUser($email: String!) {
+  registerTemporaryUser(input: { email: $email })
+}

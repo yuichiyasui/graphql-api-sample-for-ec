@@ -14,12 +14,17 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "query AllItems {\n  items {\n    id\n    name\n    price\n    displayPrice\n    mainImageUrl\n  }\n}": types.AllItemsDocument,
+    "mutation RegisterTemporaryUser($email: String!) {\n  registerTemporaryUser(input: {email: $email})\n}": types.RegisterTemporaryUserDocument,
 };
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query AllItems {\n  items {\n    id\n    name\n    price\n    displayPrice\n    mainImageUrl\n  }\n}"): (typeof documents)["query AllItems {\n  items {\n    id\n    name\n    price\n    displayPrice\n    mainImageUrl\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation RegisterTemporaryUser($email: String!) {\n  registerTemporaryUser(input: {email: $email})\n}"): (typeof documents)["mutation RegisterTemporaryUser($email: String!) {\n  registerTemporaryUser(input: {email: $email})\n}"];
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.

@@ -30,7 +30,7 @@ const ItemList = async () => {
   );
 };
 
-export default async function Page() {
+export default function Page() {
   return (
     <div className="my-4">
       <section className="mx-4">
